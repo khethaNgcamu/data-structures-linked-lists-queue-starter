@@ -21,8 +21,8 @@ class DoublyLinkedList {
         // Add node of val to head of linked list
         let newNode = new DoublyLinkedNode(val);
 
-        if (this.length >= 0) {
-            this.head.previous = newNode;
+        if (this.length > 0) {
+            this.head.prev = newNode;
             newNode.next = this.head;
             this.head = newNode;
         } else {
@@ -35,30 +35,79 @@ class DoublyLinkedList {
 
     addToTail(val) {
         // Add node of val to tail of linked list
+        let newNode = new DoublyLinkedNode(val);
+
+        if(this.length > 0){
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode;
+        }else{
+            this.head = newNode;
+            this.tail = newNode;
+        }
 
         // Write your hypothesis on the time complexity of this method here
+
+         // Hypothesis: Time complexity of this method is O(1)
     }
 
     removeFromHead() {
         // Remove node at head
+        if (this.length === 0) return null;
+
+        let removedNode = this.head;
+
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = this.head.next;
+            this.head.prev = null;
+        }
+
+        this.length--;
+        return removedNode.value;
 
         // Write your hypothesis on the time complexity of this method here
+
+        // Hypothesis: Time complexity of this method is O(1)
     }
 
     removeFromTail() {
         // Remove node at tail
+        if (this.length === 0) return null;
+
+        let removedNode = this.tail;
+
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.tail = this.tail.prev;
+            this.tail.next = null;
+        }
+
+        this.length--;
+        return removedNode.value;
+
 
         // Write your hypothesis on the time complexity of this method here
     }
 
     peekAtHead() {
         // Return value of head node
+        if(this.head === null) return null;
+
+        return this.head.value;
 
         // Write your hypothesis on the time complexity of this method here
     }
 
     peekAtTail() {
         // Return value of tail node
+        if(this.tail === null) return null;
+
+        return this.tail.value;
         
         // Write your hypothesis on the time complexity of this method here
     }
